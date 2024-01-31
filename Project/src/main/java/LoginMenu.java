@@ -7,6 +7,7 @@ public class LoginMenu {
         String command;
         Matcher matcher;
         String result;
+        //we use regex to get the data out of the line that we input through command line
         while (true) {
             command = scanner.nextLine();
             if ((matcher = controller.getMatcher(command,  "\\s*register\\s+(?<username>\\S+)\\s+(?<password>\\S+)\\s*")) != null) {
@@ -14,6 +15,7 @@ public class LoginMenu {
             }
             else if ((matcher = controller.getMatcher(command, "\\s*login\\s+(?<username>\\S+)\\s+(?<password>\\S+)\\s*")) != null) {
                 result = controller.login(matcher.group("username"), matcher.group("password"));
+                System.out.println(result);
                 if (!result.equals("login failed: password was incorrect") && !result.equals("login failed: username not found")) {
                     return result;
                 }
