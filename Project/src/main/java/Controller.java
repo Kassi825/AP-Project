@@ -127,15 +127,15 @@ public class Controller {
             database.getAccounts().add(snappfoodAdmin);
             database.setSnappfoodAdmin(snappfoodAdmin);
         }
-        return "register successful";
+        return "register successful!";
     }
 
     public String login(String username, String password) {
 
         if (!usernameExists(username))
-            return "login failed: username not found";
+            return "login failed: username not found!";
         if (!passwordIsCorrect(database.getAccountByUsername(username), password))
-            return "login failed: password was incorrect";
+            return "login failed: password was incorrect!";
 
         currentLoggedInAccount = database.getAccountByUsername(username);
         System.out.println("login successful!");
