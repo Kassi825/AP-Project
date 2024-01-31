@@ -14,10 +14,9 @@ public class LoginMenu {
             }
             else if ((matcher = controller.getMatcher(command, "\\s*login\\s+(?<username>\\S+)\\s+(?<password>\\S+)\\s*")) != null) {
                 result = controller.login(matcher.group("username"), matcher.group("password"));
-                return result;
-            //    if (!result.equals("") && !result.equals(" ")) {
-            //        return result;
-            //    }
+                if (!result.equals("login failed: password was incorrect") && !result.equals("login failed: username not found")) {
+                    return result;
+                }
 
             }
             else if (command.equals("exit")) {
