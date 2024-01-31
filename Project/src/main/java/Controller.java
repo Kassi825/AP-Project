@@ -3,7 +3,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 public class Controller {
-
+    // all of these fields below are used to as reference for when we require an instance of a specific object
     private Scanner scanner = new Scanner(System.in);
     private Database database;
     private LoginMenu loginMenu;
@@ -56,7 +56,7 @@ public class Controller {
             }
         }
     }
-
+    // username must only have alphabet characters or digits or '_'
     private boolean usernameIsValid(String username) {
         matcher = getMatcher(username, "[\\w_]+");
         if (matcher != null) {
@@ -64,15 +64,15 @@ public class Controller {
         }
         return false;
     }
-
+    // to check if username is used
     private boolean usernameExists(String username) {
         return database.getAccountByUsername(username) != null;
     }
-
+    // password must only have alphabet characters or digits or '_'
     private boolean passwordIsValid(String password) {
         return password.matches("[\\w_]+");
     }
-
+    // password is strong only if it has at least a digit, a small letter, a capital letter, and have at least 5 characters
     private boolean passwordIsStrong(String password) {
         if (!password.matches(".*[a-z].*") ||
                 !password.matches(".*[A-Z].*") ||
@@ -81,7 +81,7 @@ public class Controller {
             return false;
         return true;
     }
-
+    // to check when logging into account
     private boolean passwordIsCorrect(Account account, String password) {
         return account.getPassword().equals(password);
     }
@@ -89,7 +89,7 @@ public class Controller {
     private boolean restaurantExists(String name) {
         return database.getRestaurantByName(name) != null;
     }
-
+    // food name can only have small letters and '-'
     private boolean nameIsValid(String name) {
         return name.matches("[\\-a-z]+");
     }
@@ -105,7 +105,7 @@ public class Controller {
         }
         return false;
     }
-
+    // for when we want to register a new account
     public String register(String username, String password, String role) {
 
         if (usernameExists(username))
@@ -130,6 +130,7 @@ public class Controller {
         return "register successful!";
     }
 
+    // for when we want to log into our account
     public String login(String username, String password) {
 
         if (!usernameExists(username))
@@ -154,7 +155,6 @@ public class Controller {
         }
         return null;
     }
-
     public void showBalance() {
         System.out.println("Your balance is: " + currentCustomer.getBalance() + "$");
     }
